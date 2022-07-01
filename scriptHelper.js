@@ -29,17 +29,39 @@ if (!testInput) {
  
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
+   document.getElementById("pilotStatus").innerHTML= `Pilot ${pilot} is ready for launch!`;
+   document.getElementById("copilotStatus").innerHTML= `Co-pilot ${copilot} is ready for launch!`;
+
+   if (fuelLevel < 10000) {
+    list.style.visibility = 'visible';
+    document.getElementById('fuelStatus').innerHTML = 'Not enough fuel for launch!';
+    document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch';
+    document.getElementById('launchStatus').style.color = rgb(160, 15, 15);
+
+   } else if (cargoLevel > 10000) {
+    list.style.visibility = 'visible';
+    document.getElementById('cargoStatus').innerHTML = 'Too much cargo mass for launch!';
+    document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch';
+    document.getElementById('launchStatus').style.color = rgb(160, 15, 15);
+
+   } else if (fuelLevel >= 10000 && cargoLevel <= 10000) {
+    list.style.visibility = 'visible';
+    document.getElementById('launchStatus').innerHTML = 'Shuttle is ready for launch';
+    document.getElementById('launchStatus').style.color = rgb(13, 82, 28);
+
+   }
+
 }
 
 async function myFetch() {
     let planetsReturned;
 
-    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-        response.json().then(function(planetsReturned){  
-            return planetsReturned;
+     await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        response.json().then(function(json){
+            planetsReturned = document.getElementById("missionTarget");
+        })  
         });
-        });
+        return planetsReturned;
         };
    
 
