@@ -26,7 +26,7 @@ if (testInput=== '') {
     return "Empty";
 } else if (isNaN(Number(testInput))) {
     return "Not a number";
-} else if (!isNaN(testInput)) {
+} else {
     return "Is a number";
 }
 }
@@ -44,7 +44,6 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    if (isNan(Number(fuelLevel))){
     return "Invalid";
    }else if (Number(fuelLevel) < 10000) {
-    list.style.visibility = 'visible';
     document.getElementById('fuelStatus').innerHTML = 'Not enough fuel for launch!';
     document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch';
     document.getElementById('launchStatus').style.color = 'rgb(160, 15, 15)';
@@ -52,19 +51,18 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
  if (isNan(Number(cargoLevel))){
     return "Invalid";
    } else if (Number(cargoLevel) > 10000) {
-    list.style.visibility = 'visible';
     document.getElementById('cargoStatus').innerHTML = 'Too much cargo mass for launch!';
     document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch';
     document.getElementById('launchStatus').style.color = 'rgb(160, 15, 15)';
 
    } else if (Number(fuelLevel) >= 10000 && Number(cargoLevel) <= 10000) {
-    list.style.visibility = 'visible';
     document.getElementById('launchStatus').innerHTML = 'Shuttle is ready for launch';
     document.getElementById('cargoStatus').innerHTML = "Cargo mass low enough for launch"
     document.getElementById('launchStatus').style.color = 'rgb(13, 82, 28)';
    }
-   return "Valid";
+   list.style.visibility = 'visible';
 }
+   return "Valid";
 }
 async function myFetch() {
     let planetsReturned;
@@ -81,5 +79,8 @@ return planets[index];
 }
 
 
-module.exports = {addDestinationInfo, validateInput, formSubmission, pickPlanet, myFetch};
-
+module.exports.addDestinationInfo = addDestinationInfo;
+module.exports.validateInput = validateInput;
+module.exports.formSubmission = formSubmission;
+module.exports.pickPlanet = pickPlanet; 
+module.exports.myFetch = myFetch;
