@@ -43,31 +43,28 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
    if (validateInput(pilot)==="Is a number" || validateInput(copilot)==="Is a number" || validateInput(fuelLevel)==="Not a number" || validateInput(cargoLevel)==="Not a number" ){
     return "Invalid";
-   }else if (Number(fuelLevel) < 10000) {
+   }else if (fuelLevel < 10000) {
     document.getElementById('fuelStatus').innerHTML = 'Not enough fuel for launch!';
     document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch';
     document.getElementById('launchStatus').style.color = 'rgb(160, 15, 15)';
     list.style.visibility = 'visible'
 
- if (isNan(Number(cargoLevel))){
-    return "Invalid";
-   } else if (Number(cargoLevel) > 10000) {
+   } else if (cargoLevel > 10000) {
     document.getElementById('cargoStatus').innerHTML = 'Too much cargo mass for launch!';
     document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch';
     document.getElementById('launchStatus').style.color = 'rgb(160, 15, 15)';
     list.style.visibility = 'visible'
 
-   } else if (Number(fuelLevel) >= 10000 && Number(cargoLevel) <= 10000) {
+   } else if (fuelLevel >= 10000 && cargoLevel <= 10000) {
     document.getElementById('launchStatus').innerHTML = 'Shuttle is ready for launch';
     document.getElementById('cargoStatus').innerHTML = "Cargo mass low enough for launch"
     document.getElementById('launchStatus').style.color = 'rgb(13, 82, 28)';
     list.style.visibility = 'visible'
    }
-   list.style.visibility = 'visible';
-}
-   return "Valid";
+ 
 }
 }
+
 async function myFetch() {
     let planetsReturned;
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response){
