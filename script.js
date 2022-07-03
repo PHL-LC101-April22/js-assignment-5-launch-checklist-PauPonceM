@@ -14,12 +14,11 @@ window.addEventListener("load", function() {
     const faultyItemsE = document.getElementById("faultyItems");
     faultyItemsE.style.visibility = "hidden";
     let form = document.querySelector("#form");
-    const propagation = true;
     form.addEventListener("submit", function(event){
-        let pilotNameInput= document.forms["testForm"]["pilotName"].value;
-        let copilotNameInput = document.forms["testForm"]["copilotName"].value;
-        let fuelLevelInput = document.forms["testForm"]["fuelLevel"].value;
-        let cargoMassInput = document.forms["testForm"]["cargoMass"].value;
+        let pilotNameInput= document.querySelector("div.formField input[name=pilotName]").value;
+        let copilotNameInput = document.querySelector("div.formField input[name=copilotName]").value;
+        let fuelLevelInput = document.querySelector("div.formField input[name=fuelLevel]").value;
+        let cargoMassInput = document.querySelector("div.formField input[name=cargoMass]").value;
      if(formSubmission(document, faultyItemsE, pilotNameInput, copilotNameInput, fuelLevelInput, cargoMassInput) === "Empty"){
          alert("All fields are required!");
      }else if (formSubmission(document, faultyItemsE, pilotNameInput, copilotNameInput, fuelLevelInput, cargoMassInput) === "Invalid") {

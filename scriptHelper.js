@@ -34,19 +34,20 @@ if (testInput=== '') {
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
-    if(validateInput(pilot) === 'Empty' || validateInput(copilot) === 'Empty' || validateInput(fuelLevel) === 'Empty' || validateInput(cargoLevel) === 'Empty'){
+    if(validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty"){
         return "Empty";
     } else {
    document.getElementById("pilotStatus").innerHTML= `Pilot ${pilot} is ready for launch!`;
    document.getElementById("copilotStatus").innerHTML= `Co-pilot ${copilot} is ready for launch!`;
-}
+   list.style.visibility = 'visible'
 
-   if (isNan(Number(fuelLevel))){
+   if (validateInput(pilot)==="Is a number" || validateInput(copilot)==="Is a number" || validateInput(fuelLevel)==="Not a number" || validateInput(cargoLevel)==="Not a number" ){
     return "Invalid";
    }else if (Number(fuelLevel) < 10000) {
     document.getElementById('fuelStatus').innerHTML = 'Not enough fuel for launch!';
     document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch';
     document.getElementById('launchStatus').style.color = 'rgb(160, 15, 15)';
+    list.style.visibility = 'visible'
 
  if (isNan(Number(cargoLevel))){
     return "Invalid";
@@ -54,15 +55,18 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     document.getElementById('cargoStatus').innerHTML = 'Too much cargo mass for launch!';
     document.getElementById('launchStatus').innerHTML = 'Shuttle not ready for launch';
     document.getElementById('launchStatus').style.color = 'rgb(160, 15, 15)';
+    list.style.visibility = 'visible'
 
    } else if (Number(fuelLevel) >= 10000 && Number(cargoLevel) <= 10000) {
     document.getElementById('launchStatus').innerHTML = 'Shuttle is ready for launch';
     document.getElementById('cargoStatus').innerHTML = "Cargo mass low enough for launch"
     document.getElementById('launchStatus').style.color = 'rgb(13, 82, 28)';
+    list.style.visibility = 'visible'
    }
    list.style.visibility = 'visible';
 }
    return "Valid";
+}
 }
 async function myFetch() {
     let planetsReturned;
